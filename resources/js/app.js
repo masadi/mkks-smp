@@ -27,7 +27,13 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 //test edit
- import Vue from 'vue';
+import Vue from 'vue';
+window.Vue = Vue;
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+import router from './routes';
 const app = new Vue({
-    el: '#app',
+    el: '#anbk',
+    router,
 });

@@ -9,8 +9,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,12 +19,13 @@
     <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet" />
 </head>
 <body>
-    <div id="app">
+    <div id="anbk">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <!--a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
-                </a>
+                </a-->
+                <router-link tag="a" to="/" class="nav-link">{{ config('app.name', 'Laravel') }}</router-link>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -42,7 +42,9 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <!--router-link tag="a" class="nav-link" to="/login">{{ __('Login') }}</router-link-->
+                                    <!--a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a-->
+                                    <router-link tag="a" to="/login" class="nav-link">{{ __('Login') }}</router-link>
                                 </li>
                             @endif
                             
@@ -74,7 +76,6 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>
