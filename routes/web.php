@@ -13,10 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/{any}', function(){
     return view('welcome');
-});
+})->where('any', '.*');
 
-Auth::routes(['register' => false]);
+//Auth::routes(['register' => false]);
+/*Route::get('/{vue_capture?}', function () {
+    //return redirect('/login');
+})->where('vue_capture', '[\/\w\.-]*');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');*/

@@ -1,27 +1,25 @@
 import VueRouter from 'vue-router';
 
-
-let routes = [{
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+      {
+        path: '/',
+        name: 'home',
+        component: Home
+      },
+      {
         path: '/login',
         name: 'login',
-        component: require('./views/auth/login').default
-    },
-    {
-        path: '/',
-        name: 'beranda',
-        component: require('./views/beranda').default
-    },
-];
-
-const router = new VueRouter({
-    path: '/app',
-    component: require('./views/beranda').default,
-    base: '/',
-    mode: 'history',
-    routes,
-    linkActiveClass: 'active',
-    user: user,
-});
+        component: Login
+      },
+      {
+        path: '/register',
+        name: 'register',
+        component: Register
+      },
+    ],
+  })
 /*router.beforeResolve((to, from, next) => {
     // If this isn't an initial page load.
     if (to.name) {
