@@ -46,13 +46,13 @@
           <template v-if="isLoggedIn">
             <li class="nav-item">
               <router-link
-                :to="{ name: 'user', params: { userId: user.id } }"
+                :to="{ name: 'user', params: { userId: user.user_id } }"
                 class="nav-link"
                 >{{ user.name }}</router-link
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="logout"> Logout</a>
+              <a href="javascript:void(0)" class="nav-link" @click="logout"> Logout</a>
             </li>
           </template>
         </ul>

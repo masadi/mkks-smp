@@ -49,7 +49,7 @@ export default {
           localStorage.setItem("jwt", data.token);
           this.$emit("setData");
 
-          this.$router.push({ name: "user", params: { userId: data.user.id } });
+          this.$router.push({ name: "user", params: { userId: data.user.user_id } });
         })
         .catch((error) => {
           this.error = error.response.data.error;
