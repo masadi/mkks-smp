@@ -64,13 +64,13 @@ const router = new VueRouter({
     },
   ],
 })
-router.beforeEach((to, from, next) => {  
-  const token = localStorage.getItem('jwt') == null;  
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('jwt') == null;
   if (to.matched.some(record => record.meta.guest)) {
     if (!token) next({ name: 'home' })
     else next()
-  } 
-  if (to.matched.some(record => record.meta.requiresAuth)) { 
+  }
+  if (to.matched.some(record => record.meta.requiresAuth)) {
     if (token) {
       next({
         path: '/login',
@@ -78,10 +78,10 @@ router.beforeEach((to, from, next) => {
       })
     } else {
       next()
-    } 
- }else{
-  next()  
-}
+    }
+  } else {
+    next()
+  }
 })
 const app = new Vue({
   el: '#app',
