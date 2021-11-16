@@ -33,6 +33,9 @@ class CreateSekolahsTable extends Migration
 			$table->string('email')->nullable();
 			$table->string('website')->nullable();
             $table->integer('status_sekolah');
+            $table->string('kecamatan_id', 8)->nullable();
+            $table->string('kabupaten_id', 8)->nullable();
+            $table->string('provinsi_id', 8)->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 			$table->primary('sekolah_id');

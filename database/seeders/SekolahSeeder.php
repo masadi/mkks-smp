@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
-use App\Sekolah;
-use App\User;
-use App\Role;
-use App\Wilayah;
+use App\Models\Sekolah;
+use App\Models\User;
+use App\Models\Role;
+use App\Models\Wilayah;
 
 class SekolahSeeder extends Seeder
 {
