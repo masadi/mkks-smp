@@ -77,53 +77,52 @@ class SedotSekolah extends Command
             foreach($sekolah as $s){
                 $data = $this->sedot('http://103.40.55.242/erapor_server/sync/get_sekolah/'.$s->npsn);
                 foreach($data->data as $dapo){
-                    if($dapo->password){
+                    if($dapo->password && $dapo->aktif && $dapo->status_sekolah == 2){
+                        $this->simpan_sekolah($dapo);
+                        /*
+                        //dd($dapo);
                         $sedot = $this->sedot_sekolah($s, $dapo);
                         if(isset($sedot->error) && $sedot->error){
                             $sedot = $this->sedot_sekolah($s, $dapo);
                         }
-                        $this->simpan_sekolah($sedot);
+                        */
                     }
                 }
             }
         }
     }
     private function simpan_sekolah($data){
-        if(isset($sedot->error) && !$data->error){
-            if($data->dapodik->status_sekolah == 2){
-                Sekolah::updateOrCreate(
-                    [
-                        'sekolah_id' => $data->dapodik->sekolah_id,
-                    ],
-                    [
-                        'nama' => $data->dapodik->nama,
-                        'npsn' => $data->dapodik->npsn,
-                        'nss' => $data->dapodik->nss,
-                        'alamat_jalan' => $data->dapodik->alamat_jalan,
-                        'rt' => $data->dapodik->rt,
-                        'rw' => $data->dapodik->rw,
-                        'nama_dusun' => $data->dapodik->nama_dusun,
-                        'desa_kelurahan' => $data->dapodik->desa_kelurahan,
-                        'kode_wilayah' => $data->dapodik->kode_wilayah,
-                        'kecamatan' => $data->dapodik->wilayah->parrent_recursive->nama,
-                        'kabupaten' => $data->dapodik->wilayah->parrent_recursive->parrent_recursive->nama,
-                        'provinsi' => $data->dapodik->wilayah->parrent_recursive->parrent_recursive->parrent_recursive->nama,
-                        'kecamatan_id' => $data->dapodik->wilayah->parrent_recursive->kode_wilayah,
-                        'kabupaten_id' => $data->dapodik->wilayah->parrent_recursive->parrent_recursive->kode_wilayah,
-                        'provinsi_id' => $data->dapodik->wilayah->parrent_recursive->parrent_recursive->parrent_recursive->kode_wilayah,
-                        'kode_pos' => $data->dapodik->kode_pos,
-                        'lintang' => $data->dapodik->lintang,
-                        'bujur' => $data->dapodik->bujur,
-                        'nomor_telepon' => $data->dapodik->nomor_telepon,
-                        'nomor_fax' => $data->dapodik->nomor_fax,
-                        'email' => $data->dapodik->email,
-                        'website' => $data->dapodik->website,
-                        'status_sekolah' => $data->dapodik->status_sekolah,
-                        'kode_registrasi' => $data->dapodik->kode_registrasi,
-                    ]
-                );
-            }
-        }
+        Sekolah::updateOrCreate(
+            [
+                'sekolah_id' => $data->sekolah_id,
+            ],
+            [
+                'nama' => $data->nama,
+                'npsn' => $data->npsn,
+                'nss' => $data->nss,
+                'alamat_jalan' => $data->alamat_jalan,
+                'rt' => $data->rt,
+                'rw' => $data->rw,
+                'nama_dusun' => $data->nama_dusun,
+                'desa_kelurahan' => $data->desa_kelurahan,
+                'kode_wilayah' => $data->kode_wilayah,
+                //'kecamatan' => $data->wilayah->parrent_recursive->nama,
+                //'kabupaten' => $data->wilayah->parrent_recursive->parrent_recursive->nama,
+                //'provinsi' => $data->wilayah->parrent_recursive->parrent_recursive->parrent_recursive->nama,
+                //'kecamatan_id' => $data->wilayah->parrent_recursive->kode_wilayah,
+                //'kabupaten_id' => $data->wilayah->parrent_recursive->parrent_recursive->kode_wilayah,
+                //'provinsi_id' => $data->wilayah->parrent_recursive->parrent_recursive->parrent_recursive->kode_wilayah,
+                'kode_pos' => $data->kode_pos,
+                'lintang' => $data->lintang,
+                'bujur' => $data->bujur,
+                'nomor_telepon' => $data->nomor_telepon,
+                'nomor_fax' => $data->nomor_fax,
+                'email' => $data->email,
+                'website' => $data->website,
+                'status_sekolah' => $data->status_sekolah,
+                'kode_registrasi' => $data->kode_registrasi,
+            ]
+        );
     }
     private function sedot($url){
         $response = Http::retry(3, 100)->get($url);
@@ -143,7 +142,7 @@ class SedotSekolah extends Command
     }
     private function ambil_data($aksi, $data_sync){
         $host_server_direktorat = 'http://103.40.55.242/erapor_server/api/'.$aksi;
-        $response = Http::asForm()->withHeaders([
+        $response = Http::retry(3, 100)->asForm()->withHeaders([
             'x-api-key' => $data_sync['sekolah_id']
         ])->withBasicAuth('admin', '1234')->post($host_server_direktorat, $data_sync);
         return $response->object();
