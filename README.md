@@ -1,62 +1,94 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
+# Laravel+Vue Crud Starter
+
+
+[![Build Status](https://dev.azure.com/anowarhossain/laravel-vue-crud-starter/_apis/build/status/AnowarCST.laravel-vue-crud-starter?branchName=master)](https://dev.azure.com/anowarhossain/laravel-vue-crud-starter/_build/latest?definitionId=6&branchName=master)
+
+
+## About Repository
+
+A very simple Laravel 8 + Vue 2 + AdminLTE 3 based Curd Starter template for SPA Application.
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<img src="https://i.imgur.com/mZAHbUL.png">
+<img src="https://i.imgur.com/3hhoQnq.png">
+<img src="https://i.imgur.com/aHtQkYl.png">
+<img src="https://i.imgur.com/V7OuwLn.png">
 </p>
 
-## About Laravel
+## Tech Specification
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Laravel 8
+- Vue 2 + VueRouter + vue-progressbar + sweetalert2 + laravel-vue-pagination
+- Laravel Passport
+- Admin LTE 3 + Bootstrap 4 + Font Awesome 5
+- PHPUnit Test Case/Test Coverage
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Modal based Create+Edit, List with Pagination, Delete with Sweetalert
+- Login, Register, Forget+Reset Password as default auth
+- Profile, Update Profile, Change Password, Avatar
+- Product Management 
+- User Management
+- Settings: Categories, Tags
+- Frontend and Backend User ACL with Gate Policy (type: admin/user)
+- Simple Static Dashboard
+- Developer Options for OAuth Clients and Personal Access Token
+- Build with Docker
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- `git clone https://github.com/AnowarCST/laravel-vue-crud-starter.git`
+- `cd laravel-vue-crud-starter/`
+- `composer install`
+- `cp .env.example .env`
+- Update `.env` and set your database credentials
+- `php artisan key:generate`
+- `php artisan migrate`
+- `php artisan db:seed`
+- `php artisan passport:install`
+- `npm install`
+- `npm run dev`
+- `php artisan serve`
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Install with Docker
 
-## Laravel Sponsors
+- `docker-compose up -d`
+- `docker exec -it vue-starter /bin/bash`
+- `composer install`
+- `cp .env.example .env`
+- `php artisan key:generate`
+- `php artisan migrate`
+- `php artisan db:seed`
+- `php artisan passport:install`
+- Application http://localhost:8008/
+- Adminer for Database http://localhost:8080/
+- DBhost: yourIP:3307, user: root, Password: 123456
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+## Unit Test
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+#### run PHPUnit
 
-## Contributing
+```bash
+# run PHPUnit all test cases
+vendor/bin/phpunit
+# or Feature test only
+vendor/bin/phpunit --testsuite Feature
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### Code Coverage Report
 
-## Code of Conduct
+```bash
+# reports is a directory name
+vendor/bin/phpunit --coverage-html reports/
+```
+A `reports` directory has been created for code coverage report. Open the dashboard.html.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Credit
+This repository is motivated by [Hujjat/laravStart](https://github.com/Hujjat/laravStart) and his awesome video tutorial in [Youtube](https://www.youtube.com/playlist?list=PLB4AdipoHpxaHDLIaMdtro1eXnQtl_UvE).
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+[MIT license](https://opensource.org/licenses/MIT).

@@ -7,24 +7,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
-use Laratrust\Traits\LaratrustUserTrait;
-use App\Traits\Uuid;
-class User extends Authenticatable
+use App\Models\Role;
+
+class User extends Authenticatable // implements MustVerifyEmail
 {
-    use LaratrustUserTrait, Uuid;
     use HasFactory, Notifiable, HasApiTokens;
-    public $incrementing = false;
-    protected $keyType = 'string';
-	protected $primaryKey = 'user_id';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'email', 'password', 'type'
     ];
 
     /**
@@ -33,8 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password', 'remember_token',
     ];
 
     /**
@@ -45,4 +39,39 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+     /**
+     * Get the profile photo URL attribute.
+     *
+     * @return string
+     */
+    public function getPhotoAttribute()
+    {
+        return 'https://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '.jpg?s=200&d=mm';
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * Assigning User role
+     *
+     * @param \App\Models\Role $role
+     */
+    public function assignRole(Role $role)
+    {
+        return $this->roles()->save($role);
+    }
+
+    public function isAdmin()
+    {
+        return $this->roles()->where('name', 'Admin')->exists();
+    }
+
+    public function isUser()
+    {
+        return $this->roles()->where('name', 'User')->exists();
+    }
 }

@@ -2,9 +2,19 @@
 
 namespace App\Models;
 
-use Laratrust\Models\LaratrustRole;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
-class Role extends LaratrustRole
+class Role extends Model
 {
-    public $guarded = [];
+    protected $fillable = [
+        'name', 'description'
+    ];
+
+    protected $table = 'roles';
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
