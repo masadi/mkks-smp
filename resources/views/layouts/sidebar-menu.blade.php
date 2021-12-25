@@ -9,15 +9,6 @@
         </router-link>
       </li>
 
-      <li class="nav-item">
-        <router-link to="/products" class="nav-link">
-          <i class="nav-icon fas fa-list orange"></i>
-          <p>
-            Product
-          </p>
-        </router-link>
-      </li>
-
       @can('isAdmin')
         <li class="nav-item">
           <router-link to="/users" class="nav-link">
@@ -45,14 +36,6 @@
               <i class="nav-icon fas fa-list-ol green"></i>
               <p>
                 Category
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/product/tag" class="nav-link">
-              <i class="nav-icon fas fa-tags green"></i>
-              <p>
-                Tags
               </p>
             </router-link>
           </li>

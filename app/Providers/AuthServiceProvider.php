@@ -32,21 +32,26 @@ class AuthServiceProvider extends ServiceProvider
          * Defining the user Roles
          */
         Gate::define('isAdmin', function ($user) {
-            // if ($user->isAdmin()) {
-            //     return true;
-            // }
-
-            // for simplicity
             return $user->type === 'admin';
         });
 
         Gate::define('isUser', function ($user) {
-            // if ($user->isUser()) {
-            //     return true;
-            // }
-
-            // for simplicity
             return $user->type === 'user';
+        });
+        Gate::define('isSekolah', function ($user) {
+            return $user->type === 'sekolah';
+        });
+        Gate::define('isDinas', function ($user) {
+            return $user->type === 'dinas';
+        });
+        Gate::define('isPengawas', function ($user) {
+            return $user->type === 'pengawas';
+        });
+        Gate::define('isBendahara', function ($user) {
+            return $user->type === 'bendahara';
+        });
+        Gate::define('isKorwil', function ($user) {
+            return $user->type === 'korwil';
         });
     }
 }
