@@ -17,35 +17,27 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->truncate();
-
-        DB::table('categories')->insert(
+        $kategori = [
             [
-                [
-                    'name' => 'Electrical Vehicle/e-Power',
-                    'description' => Str::words(50),
-                ],
-                [
-                    'name' => 'Compact Car',
-                    'description' => Str::words(50),
-                ],
-                [
-                    'name' => 'Light Car',
-                    'description' => Str::words(50),
-                ],
-                [
-                    'name' => 'Minivan',
-                    'description' => Str::words(50),
-                ],
-                [
-                    'name' => 'Sports & Specialty',
-                    'description' => Str::words(50),
-                ],
-                [
-                    'name' => 'Sedan',
-                    'description' => Str::words(50),
-                ],
-            ]
-        );
+                'nama' => 'Informasi',
+            ],
+            [
+                'nama' => 'Dinas',
+            ],
+            [
+                'nama' => 'Edaran',
+            ],
+            [
+                'nama' => 'Kegiatan',
+            ],
+            [
+                'nama' => 'Undangan',
+            ],
+        ];
+        foreach($kategori as $a){
+            DB::table('kategori')->updateOrinsert([
+                'nama' => $a
+            ]);
+        }
     }
 }

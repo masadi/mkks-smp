@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use App\Models\Sekolah;
 use App\Models\Wilayah;
+use File;
 
 class SedotSekolah extends Command
 {
@@ -77,7 +78,7 @@ class SedotSekolah extends Command
             foreach($sekolah as $s){
                 $data = $this->sedot('http://103.40.55.242/erapor_server/sync/get_sekolah/'.$s->npsn);
                 foreach($data->data as $dapo){
-                    if($dapo->password && $dapo->aktif && $dapo->status_sekolah == 2){
+                    if($dapo->password && $dapo->username && $dapo->aktif && $dapo->status_sekolah == 2){
                         $this->simpan_sekolah($dapo);
                         /*
                         //dd($dapo);
@@ -92,7 +93,12 @@ class SedotSekolah extends Command
         }
     }
     private function simpan_sekolah($data){
-        Sekolah::updateOrCreate(
+        $folder = public_path('sekolah');
+        if(!File::isDirectory($folder)){
+            File::makeDirectory($folder, 0777, true, true);
+        }
+        File::put($folder.'/'.$data->sekolah_id.'.json', json_encode($data));
+        /*Sekolah::updateOrCreate(
             [
                 'sekolah_id' => $data->sekolah_id,
             ],
@@ -122,7 +128,7 @@ class SedotSekolah extends Command
                 'status_sekolah' => $data->status_sekolah,
                 'kode_registrasi' => $data->kode_registrasi,
             ]
-        );
+        );*/
     }
     private function sedot($url){
         $response = Http::retry(3, 100)->get($url);
