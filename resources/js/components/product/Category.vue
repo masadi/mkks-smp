@@ -33,7 +33,7 @@
                      <tr v-for="category in categories.data" :key="category.id">
 
                       <td>{{category.id}}</td>
-                      <td class="text-capitalize">{{category.name}}</td>
+                      <td class="text-capitalize">{{category.nama}}</td>
                       <td>{{category.description}}</td>
                       <td>{{category.created_at}}</td>
                       <td>

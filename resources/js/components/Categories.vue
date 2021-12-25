@@ -17,6 +17,9 @@
                   </button>
                 </div>
               </div>
+              {{categories}}
+              {{products}}
+              a
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover">
@@ -24,7 +27,7 @@
                     <tr>
                       <th>ID</th>
                       <th>Name</th>
-                      <th>Description</th>
+                      <th>Jml Berita</th>
                       <!-- <th>Photo</th> -->
                       <th>Action</th>
                     </tr>

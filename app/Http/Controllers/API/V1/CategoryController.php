@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class CategoryController extends BaseController
@@ -15,7 +15,7 @@ class CategoryController extends BaseController
      *
      * @return void
      */
-    public function __construct(Category $category)
+    public function __construct(Kategori $category)
     {
         $this->middleware('auth:api');
         $this->category = $category;
